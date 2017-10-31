@@ -1,4 +1,2 @@
 HelloWorld
 Spark hadoop
-git hive
-sqoop
