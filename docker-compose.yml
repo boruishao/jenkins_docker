@@ -1,0 +1,10 @@
+version: '3'
+services:
+  docker1:
+    image: test:latest
+    ports:
+         - "8090:8080"
+  docker2:
+    image: test:latest
+    ports:
+         - "8010:8080"       
