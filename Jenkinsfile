@@ -25,7 +25,8 @@ pipeline {
         }   
         stage('RunDocker') {
         	steps{
-        		sh 'docker run -d -p 8090:8080 test:latest'
+				sh 'docker stop jenkins_test'
+        		sh 'docker run --name -d -p 8090:8080 test:latest'
         	}
         }   
     }
