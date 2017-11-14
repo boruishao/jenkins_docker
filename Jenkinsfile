@@ -1,26 +1,11 @@
+enkinsfile (Declarative Pipeline)
 pipeline {
-  agent any
-  stages {
-    stage('build') {
-      agent {
-        dockerfile {
-          filename 'dockFile'
+    agent { docker 'maven:3.3.3' }
+    stages {
+        stage('build') {
+            steps {
+                sh 'mvn --version'
+            }
         }
-        
-      }
-      steps {
-        sh 'mkdir /opt/software'
-      }
     }
-    stage('test') {
-      steps {
-        sleep 2
-      }
-    }
-    stage('deploy') {
-      steps {
-        echo 'success'
-      }
-    }
-  }
 }
