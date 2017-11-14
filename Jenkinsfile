@@ -3,39 +3,39 @@ pipeline {
     stages {
         stage('Build') {            
             steps {                
-                echo 'Building'            
+                sh 'javac Test.java'           
             }        
         }        
         stage('Test') {            
             steps {                
-                echo 'Testing'            
+                echo 'Testing'  
+                sh 'java -jar Test'
+                echo  'Testing Success'         
             }        
         }
-        stage('Deploy - Staging') {            
+        stage('BuildDocker') {            
             steps {                
-                echo './deploy staging'                
-                echo './run-smoke-tests'            
-            }        
-        }        
-        stage('Sanity check') {            
-            steps {                
-                input "Does the staging environment look ok?"            
-            }        
-        }        
-        stage('Deploy - Production') {            
-            steps {                
-                echo './deploy production'            
+                sh 'docker build -t test .'    
             }        
         }    
+        stage('Sanity check') {            
+            steps {                
+                input "Do you want to run docker? "            
+            }        
+        }   
+        stage('RunDocker') {
+        	steps{
+        		sh 'docker run -d -p 8090:8080 test:latest'
+        	}
+        }   
     }
-
     post {        
         always {            
             echo 'One way or another, I have finiechoed'            
             deleteDir() /* clean up our workspace */        
         }        
         success {            
-            echo 'I succeeeded!'        
+            echo 'succeeeded!'        
         }        
         unstable {            
             echo 'I am unstable :/'        
