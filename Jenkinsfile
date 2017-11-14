@@ -9,7 +9,7 @@ pipeline {
         stage('Test') {            
             steps {                
                 echo 'Testing'  
-                sh 'java -jar Test'
+                sh 'java Test'
                 echo  'Testing Success'         
             }        
         }
