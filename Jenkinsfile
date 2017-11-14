@@ -26,7 +26,7 @@ pipeline {
         stage('RunDocker') {
         	steps{
 				
-        		sh 'docker run --name jenkinsTest -d -p 8090:8080 test:latest'
+        		sh 'docker-compose up'
         	}
         }   
     }
