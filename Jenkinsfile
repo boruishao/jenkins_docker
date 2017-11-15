@@ -26,7 +26,7 @@ pipeline {
         stage('RunDocker') {
         	steps{
 				
-        		sh 'docker-compose up'
+        		sh 'docker-compose restart'
         	}
         }   
     }
